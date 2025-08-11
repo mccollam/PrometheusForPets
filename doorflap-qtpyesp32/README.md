@@ -2,7 +2,7 @@
 Counts entries and exits on a pet door using an accelerometer and exposes them as Prometheus metrics
 
 ## Hardware
-### BOM
+### Bill of Materials (BOM)
 * [Adafruit QT Py ESP32-S3 with STEMMA (8GB flash, no PSRAM)](https://www.adafruit.com/product/5426)
 * [Adafruit MSA301 Accelerometer](https://www.adafruit.com/product/4344)
 * [Adafruit STEMMA QT cable](https://www.adafruit.com/product/4210) (any length)
