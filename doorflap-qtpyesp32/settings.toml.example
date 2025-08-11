@@ -1,0 +1,4 @@
+# Copy this to `settings.toml` and edit the fields below
+CIRCUITPY_WIFI_SSID="Your WiFi SSID"
+CIRCUITPY_WIFI_PASSWORD="Your WiFi Password"
+
