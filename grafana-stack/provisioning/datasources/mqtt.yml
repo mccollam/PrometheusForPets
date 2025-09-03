@@ -1,0 +1,9 @@
+apiVersion: 1
+datasources:
+- name: 'mqtt'
+  type: 'grafana-mqtt-datasource'
+  isDefault: true
+  isEditable: true
+  jsonData: {
+    'uri': 'tcp://mosquitto:1883'
+  }
