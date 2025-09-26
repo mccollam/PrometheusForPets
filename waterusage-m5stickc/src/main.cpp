@@ -8,6 +8,12 @@
 #include "credentials.h"  // Wifi and Grafana Cloud credentials
 #include "certificates.h" // Root CA for Grafana certificates
 
+/*** Some measurements taken with the water bowl (in grams) ***/
+#define BOWL_WEIGHT 40
+#define WATER_ONE_THIRD 260
+#define WATER_TWO_THIRDS 520
+#define WATER_FULL 820
+
 M5UnitWeightI2C scale;
 
 PromLokiTransport transport;
@@ -47,8 +53,6 @@ void setup()
     Serial.println("done!");
     M5.Lcd.printf("found!");
 
-    // Zero the scale (TODO: Remove in final)
-    scale.setOffset();
 
     /*** Set up wifi ***/
     Serial.print("Setting up wifi... ");
@@ -108,9 +112,14 @@ void loop()
     M5.Lcd.fillScreen(BLACK);
     M5.Lcd.setTextSize(5);
     M5.Lcd.setCursor(10, 10);
-    M5.Lcd.printf("%.2fg", weight);
+    M5.Lcd.printf("%.1fg", weight);
     M5.Lcd.setCursor(10, 70);
-    M5.Lcd.printf("Empty!");
+    if (weight < WATER_ONE_THIRD + BOWL_WEIGHT)
+        M5.Lcd.printf("Empty!");
+    else if (weight < WATER_TWO_THIRDS + BOWL_WEIGHT)
+        M5.Lcd.printf("Good");
+    else
+        M5.Lcd.printf("Full!");
 
     /*** Add the measurement ***/
     if (!ts_weight.addSample(time, weight))
