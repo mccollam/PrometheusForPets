@@ -40,8 +40,8 @@ def metrics_handler(request: Request):
 	data = (
 		   '# HELP door_use_counter number of uses of the pet door\n'
 		+  '# TYPE door_use_counter counter\n'
-		+ f'door_use_counter{{door="front_dog_door", type="entries"}} {entries}\n'
-		+ f'door_use_counter{{door="front_dog_door", type="exits"}} {exits}\n'
+		+ f'door_use_counter_total{{door="front_dog_door", type="entries"}} {entries}\n'
+		+ f'door_use_counter_total{{door="front_dog_door", type="exits"}} {exits}\n'
 		)
 		
 	return Response(request, data, content_type="text/plain; version=0.0.4")
