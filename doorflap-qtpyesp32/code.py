@@ -19,6 +19,12 @@ msa = adafruit_msa3xx.MSA301(i2c)
 ### Connect to wifi
 ssid = getenv("CIRCUITPY_WIFI_SSID")
 password = getenv("CIRCUITPY_WIFI_PASSWORD")
+#  set static IP address
+ipv4 =  ipaddress.IPv4Address("192.168.0.50")
+netmask =  ipaddress.IPv4Address("255.255.255.0")
+gateway =  ipaddress.IPv4Address("192.168.1.1")
+wifi.radio.set_ipv4_address(ipv4=ipv4,netmask=netmask,gateway=gateway)
+
 print("Connecting to wifi")
 try:
 	wifi.radio.connect(ssid, password)
