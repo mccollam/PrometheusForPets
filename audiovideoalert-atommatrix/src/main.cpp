@@ -30,7 +30,18 @@ void mqttReceived(String &topic, String &payload)
 {
     if (topic == MQTT_TOPIC)
     {
-        alerting = payload;            
+        // We could / should actually parse the JSON object we get from the alert.
+        // But instead, we'll just look to see if it contains "status"...
+        if (payload.indexOf("status") != -1)
+        {
+            // ... and if so, if that status contains "firing".
+            // This is _not_ super robust, but it's for a fast demo.
+            if (payload.indexOf("firing") != -1)
+                alerting = true;
+            else
+                alerting = false;
+        }
+
     }
 }
 
@@ -67,6 +78,7 @@ void setup()
     port_a_pin2 = M5.getPin(m5::pin_name_t::port_a_pin2);
     Serial.printf("getPin: RX:%d TX:%d\n", port_a_pin1, port_a_pin2);
     Serial.print("Starting audio player...");
+    
     while (!audioplayer.begin(&Serial1, port_a_pin1, port_a_pin2))
     {
         Serial.print(".");
@@ -76,6 +88,7 @@ void setup()
     audioplayer.setVolume(20);
     audioplayer.setPlayMode(AUDIO_PLAYER_MODE_ALL_LOOP);
     audioplayer.playAudio();
+    
 
     // Set up the MQTT client
     Serial.print("Connecting to MQTT server...");
@@ -95,16 +108,21 @@ void setup()
 
 void loop()
 {
+    static bool prev_alert_state = false;
+    mqtt.loop();
     if (alerting)
     {
         draw_face(leds, FACE_SAD);
-        audioplayer.playAudio();
+        if (!prev_alert_state)
+            audioplayer.playAudio();
+        prev_alert_state = true;
     }
     else
     {
         draw_face(leds, FACE_HAPPY);
         FastLED.show();
         audioplayer.stopAudio();
+        prev_alert_state = false;
     }
     delay(1000);
 }
