@@ -1,0 +1,12 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: MQTT
+      receivers:
+        - uid: cezd24se9i96of
+          type: mqtt
+          settings:
+            brokerUrl: tcp://mqtt:1883
+            retain: false
+            topic: dog/alerts
+          disableResolveMessage: false
