@@ -60,8 +60,9 @@ void setup()
     M5.Lcd.printf("Wifi ");
 
 
-    transport.setUseTls(true);
-    transport.setCerts(grafanaCert, strlen(grafanaCert));
+    // Uncomment the below for Grafana Cloud
+    //transport.setUseTls(true);
+    //transport.setCerts(grafanaCert, strlen(grafanaCert));
     transport.setWifiSsid(WIFI_SSID);
     transport.setWifiPass(WIFI_PASSWORD);
     transport.setDebug(Serial);
@@ -79,8 +80,10 @@ void setup()
     client.setUrl(GC_URL);
     client.setPath((char*)GC_PATH);
     client.setPort(GC_PORT);
-    client.setUser(GC_USER);
-    client.setPass(GC_PASS);
+
+    // Uncomment the below for Grafana Cloud
+    //client.setUser(GC_USER);
+    //client.setPass(GC_PASS);
     client.setDebug(Serial);
     if (!client.begin())
     {
