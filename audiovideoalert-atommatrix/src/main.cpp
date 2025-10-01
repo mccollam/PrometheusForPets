@@ -85,7 +85,7 @@ void setup()
         delay(500);
     }
     Serial.println(" done!");
-    audioplayer.setVolume(20);
+    audioplayer.setVolume(30);
     audioplayer.setPlayMode(AUDIO_PLAYER_MODE_ALL_LOOP);
     audioplayer.playAudio();
     
