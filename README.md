@@ -46,3 +46,11 @@ Uses a scale to determine how much water is in a pet's bowl and send an alert
 if the level gets too low.
 * *Dev board:* M5 [M5StickC Plus](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit)
 * *Sensor:* M5 [HX711 scale](https://shop.m5stack.com/products/mini-scales-unit-hx711)
+
+### Audio/video alert
+*audiovideoalert-atommatrix*
+
+Uses LEDs and an audio player to show alerts, e.g. when the water level gets
+too low.
+* *Dev board:* M5 [M5 Atom Matrix](https://shop.m5stack.com/products/atom-matrix-esp32-development-kit)
+* *Audio board:* M5 [M5 Audio Player Unit](https://shop.m5stack.com/products/audio-player-unit-n9301)
